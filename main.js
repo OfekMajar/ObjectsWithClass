@@ -1,62 +1,25 @@
-class Entity {
-  constructor(name, height, width, y, x, lifes, image, speed, id) {
-    this.name = name;
-    this.width = `${width}px`;
-    this.height = height;
-    this.x = x;
-    this.y = y;
-    this.lifes = lifes;
-    this.image = image;
-    this.speed = speed;
-    this.id = id;
-  }
-  draw() {
-    return `
-    <div class="enemyDiv"> 
-    <img src="${this.image}" alt="marioImg" id="${this.name}${this.id}">
-    </div>
-    `;
-  }
-}
-class Player extends Entity {
-  constructor(name, height, width, y, x, lifes, image, speed) {
-    super(name, height, width, y, x, lifes, image, speed);
-  }
-
-  draw() {
-    return `
-    <div id="PlayerDiv" style= "height: max-content;
-    width: max-content;"> 
-    <img src="${this.image}" alt="marioImg" id="${this.name}Img" style="width:${this.width}px; height:${this.height}px; transform: translate(100px,100px);">
-    </div>
-    `;
-  }
-}
-class Enemy extends Entity {
-  constructor(name, height, width, x, y, image, speed, damage) {
-    super(name, height, width, x, y, image, speed);
-    this.damage = damage;
-  }
-  draw() {
-    return `
-    <div class="enemyDiv"> 
-    <img src="${this.image}" alt="marioImg" id="${this.name}${this.id}">
-    </div>
-    `;
-  }
+class Product{
+    constructor(title,price,inSale=false,salePrecentage=0,quantity,image){
+        this.title=title
+        this.price=price
+        this.inSale=inSale
+        this.salePrecentage=salePrecentage
+        this.priceAfterSale=price;
+        this.quantity=quantity
+        this.image=image
+    }
+    discountedPrice(){
+        if(this.inSale){
+                    this.priceAfterSale=this.price -this.price*this.salePrecentage/100;
+        }
+    }
+    getTotalPrice(){
+        this.discountedPrice()
+        return this.quantity*this.priceAfterSale
+    }
 }
 
-class Platform {
-  constructor(location, height, width, texture) {}
-}
-let player1 = new Player(
-  "Mario",
-  64,
-  32,
-  100,
-  100,
-  3,
-  "https://stiemannkj1.gitlab.io/images/marios-size-and-shape/super-mario.gif",
-  10
-);
-container.innerHTML = player1.draw();
+let myProduct =new Product ("banana",100,false,0,10)
+let myProduct2 =new Product ("banana",100,true,10,10)
+console.log(myProduct.getTotalPrice());
+console.log(myProduct2.getTotalPrice());

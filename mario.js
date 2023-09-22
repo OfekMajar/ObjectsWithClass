@@ -31,7 +31,19 @@ class Player extends Entity {
       </div>
       `;
   }
+  movePlayerRight(){
+    window.addEventListener("keydown",(e)=>{
+        if(e.code===100){
+            console.log("hii");
+        }
+    })
+  }
 }
+document.addEventListener("keydown",function (event){
+    if(event.key==="d"){
+        console.log("hii");
+    }
+})
 class Enemy extends Entity {
   constructor(name, height, width, x, y, image, speed, damage) {
     super(name, height, width, x, y, image, speed);
